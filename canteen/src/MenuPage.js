@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from "react";
+
 function MenuPage() {
     const [menu, setMenu] = useState([]);
 
     useEffect(() => {
         //mock data later fetch from spring boot api
-        setMenu([
-            { id: 1, name: "Veg Thali", price: 60 },
-            { id: 2, name: "Chicken Curry", price: 120 },
-            { id: 3, name: "Paneer Butter Masala", price: 100 },
-        ]);
+
+        fetch("/data/data.json")
+        .then((response) => response.json())
+        .then((data) => setMenu(data))
+        .catch((error) => console.error("Error loading menu!!"));
+        
     }, []);
 
     const handleOrder = (item) => {
